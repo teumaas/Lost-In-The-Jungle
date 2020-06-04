@@ -58,6 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Editor settings
+ProjectSettings/EditorSettings.asset
+
 # VSCode
 .vscode/*
 !.vscode/settings.json
@@ -74,3 +77,4 @@ Assets/Heureka.meta
 
 # Local History for Visual Studio Code
 .history/
+
