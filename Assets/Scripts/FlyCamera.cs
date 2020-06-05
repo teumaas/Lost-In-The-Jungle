@@ -19,6 +19,13 @@ public class FlyCamera : MonoBehaviour {
     private float runtime = 5.0f;
     private bool justRan = true;
 
+    // Use this for initialization
+    void Start()
+    {
+        //Set Cursor to not be visible
+        Cursor.visible = false;
+    }
+
     void Update () {
         //Mouse transformations
         lastMouse = Input.mousePosition - lastMouse ;
