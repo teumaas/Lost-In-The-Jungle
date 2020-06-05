@@ -3594,6 +3594,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc94dc0e3fc8134182e313efc254c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSpeed: 25
+  shiftAdd: 250
+  maxShift: 1000
+  camSens: 0.1
+  runtime: 5
 --- !u!114 &399818903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14008,11 +14013,11 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 0baf114d6f2862845954d15eab38d256, type: 2}
   m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
+  m_TreeBillboardDistance: 300
+  m_TreeCrossFadeLength: 100
+  m_TreeMaximumFullLODCount: 500
+  m_DetailObjectDistance: 150
+  m_DetailObjectDensity: 0.5
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1024
   m_HeightmapMaximumLOD: 0
