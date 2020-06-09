@@ -9,6 +9,8 @@ public class QuestionMarkers : MonoBehaviour
     public bool questionOneAnswered = false;
     public bool questionTwoAnswered = false;
     public bool questionThreeAnswered = false;
+    public bool questionFourAnswered = false;
+    public bool questionFiveAnswered = false;
 
     public static bool gameIsPaused = false;
     public GameObject questionUI;
@@ -17,9 +19,11 @@ public class QuestionMarkers : MonoBehaviour
     public TextMeshProUGUI answerTwoButtonText;
     public TextMeshProUGUI answerThreeButtonText;
     public TextMeshProUGUI answerFourButtonText;
-    public int timerQuestionOne = 26;
-    public int timerQuestionTwo = 37;
-    public int timerQuestionThree = 53;
+    public int timerQuestionOne = 3;
+    public int timerQuestionTwo = 26;
+    public int timerQuestionThree = 37;
+    public int timerQuestionFour = 53;
+    public int timerQuestionFive = 60;
 
     // Update is called once per frame
     void Update()
@@ -35,6 +39,14 @@ public class QuestionMarkers : MonoBehaviour
         // Question three trigger
         if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
             Pause(3);
+        }
+        // Question four trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
+            Pause(4);
+        }
+        // Question five trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
+            Pause(5);
         }
     }
 
@@ -66,6 +78,18 @@ public class QuestionMarkers : MonoBehaviour
         answerTwoButtonText.text = "Rechts";
         answerThreeButtonText.text = "Rechtdoor";
         answerFourButtonText.text = "Achteruit";
+        }else if(questionNumber == 4){
+        questionText.text = "Groen, bruin of geel?";
+        answerOneButtonText.text = "Groen";
+        answerTwoButtonText.text = "Bruin";
+        answerThreeButtonText.text = "Geel";
+        answerFourButtonText.text = "Blauw";
+        }else if(questionNumber == 5){
+        questionText.text = "Bier, koffie of thee?";
+        answerOneButtonText.text = "Bier";
+        answerTwoButtonText.text = "Koffie";
+        answerThreeButtonText.text = "Thee";
+        answerFourButtonText.text = "Wijn";
         }
         // Zero speed (Pause)
         Time.timeScale = 0f;
@@ -81,6 +105,12 @@ public class QuestionMarkers : MonoBehaviour
         }
         if(Time.timeSinceLevelLoad >= (timerQuestionThree - 1)){
             questionThreeAnswered = true;
+        }
+        if(Time.timeSinceLevelLoad >= (timerQuestionFour - 1)){
+            questionFourAnswered = true;
+        }
+        if(Time.timeSinceLevelLoad >= (timerQuestionFive - 1)){
+            questionFiveAnswered = true;
         }
     }
 
