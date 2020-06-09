@@ -15,20 +15,23 @@ public class QuestionMarkers : MonoBehaviour
     public Text answerOneButtonText;
     public Text answerTwoButtonText;
     public Text answerThreeButtonText;
+    public int timerQuestionOne = 26;
+    public int timerQuestionTwo = 37;
+    public int timerQuestionThree = 53;
 
     // Update is called once per frame
     void Update()
     {
         // Question one trigger
-        if(Time.timeSinceLevelLoad >= 26 && questionOneAnswered == false){
+        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
             Pause(1);
         }
         // Question two trigger
-        if(Time.timeSinceLevelLoad >= 37 && questionTwoAnswered == false){
+        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
             Pause(2);
         }
         // Question three trigger
-        if(Time.timeSinceLevelLoad >= 53 && questionThreeAnswered == false){
+        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
             Pause(3);
         }
     }
@@ -65,13 +68,13 @@ public class QuestionMarkers : MonoBehaviour
     }
 
     void checkQuestionAnswered(){
-        if(Time.timeSinceLevelLoad >= 25){
+        if(Time.timeSinceLevelLoad >= (timerQuestionOne - 1)){
             questionOneAnswered = true;
         }
-        if(Time.timeSinceLevelLoad >= 36){
+        if(Time.timeSinceLevelLoad >= (timerQuestionTwo - 1)){
             questionTwoAnswered = true;
         }
-        if(Time.timeSinceLevelLoad >= 52){
+        if(Time.timeSinceLevelLoad >= (timerQuestionThree - 1)){
             questionThreeAnswered = true;
         }
     }
