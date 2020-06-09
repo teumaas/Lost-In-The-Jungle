@@ -42,21 +42,22 @@ public class QuestionMarkers : MonoBehaviour
 
     void Pause(int questionNumber){
         questionUI.SetActive(true);
+        // Update met dummy data -- TBD Smits API data implementatie
         if(questionNumber == 1){
-        questionText.text = "Vraag 1";
-        answerOneButtonText.text = "Vraag 1 - Antwoord 1";
-        answerTwoButtonText.text = "Vraag 1 - Antwoord 2";
-        answerThreeButtonText.text = "Vraag 1 - Antwoord 3";
+        questionText.text = "Bier, koffie of thee?";
+        answerOneButtonText.text = "Bier";
+        answerTwoButtonText.text = "Koffie";
+        answerThreeButtonText.text = "Thee";
         }else if(questionNumber == 2){
-        questionText.text = "Vraag 2";
-        answerOneButtonText.text = "Vraag 2 - Antwoord 1";
-        answerTwoButtonText.text = "Vraag 2 - Antwoord 2";
-        answerThreeButtonText.text = "Vraag 2 - Antwoord 3";
+        questionText.text = "Groen, bruin of geel?";
+        answerOneButtonText.text = "Groen";
+        answerTwoButtonText.text = "Bruin";
+        answerThreeButtonText.text = "Geel";
         }else if(questionNumber == 3){
-        questionText.text = "Vraag 3";
-        answerOneButtonText.text = "Vraag 3 - Antwoord 1";
-        answerTwoButtonText.text = "Vraag 3 - Antwoord 2";
-        answerThreeButtonText.text = "Vraag 3 - Antwoord 3";
+        questionText.text = "Links, rechts of rechtdoor?";
+        answerOneButtonText.text = "Links";
+        answerTwoButtonText.text = "Rechts";
+        answerThreeButtonText.text = "Rechtdoor";
         }
         // Zero speed (Pause)
         Time.timeScale = 0f;
@@ -76,18 +77,21 @@ public class QuestionMarkers : MonoBehaviour
     }
 
     public void clickButtonOne(){
+        // -- TBD Smits API data implementatie
         Debug.Log("First answer clicked.");
         checkQuestionAnswered();
         Resume();
     }
 
     public void clickButtonTwo(){
+        // -- TBD Smits API data implementatie
         Debug.Log("Second answer clicked.");
         checkQuestionAnswered();
         Resume();
     }
 
     public void clickButtonThree(){
+        // -- TBD Smits API data implementatie
         Debug.Log("Third answer clicked.");
         checkQuestionAnswered();
         Resume();
