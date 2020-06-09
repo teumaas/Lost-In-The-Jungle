@@ -8,8 +8,6 @@ public class APIHandler
     [SerializeField]
     private string BaseURL = "https://serious-game-server.herokuapp.com";
 
-    private Departement Departement;
-
     private string Result;
 
     public APIHandler()
@@ -17,9 +15,9 @@ public class APIHandler
 
     }
 
-    public IEnumerator Post(string path, string id, WWWForm body)
+    public IEnumerator PostGamePin(string path, string id)
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Post(this.BaseURL + path + id, body))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(this.BaseURL + path + id, string.Empty))
         {
             // GameObject popup = Instantiate(PopUpPrefab, new Vector3(0, 0), Quaternion.identity) as GameObject;
             
