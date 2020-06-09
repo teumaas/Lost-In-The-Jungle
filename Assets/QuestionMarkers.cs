@@ -15,6 +15,7 @@ public class QuestionMarkers : MonoBehaviour
     public Text answerOneButtonText;
     public Text answerTwoButtonText;
     public Text answerThreeButtonText;
+    public Text answerFourButtonText;
     public int timerQuestionOne = 26;
     public int timerQuestionTwo = 37;
     public int timerQuestionThree = 53;
@@ -51,16 +52,19 @@ public class QuestionMarkers : MonoBehaviour
         answerOneButtonText.text = "Bier";
         answerTwoButtonText.text = "Koffie";
         answerThreeButtonText.text = "Thee";
+        answerFourButtonText.text = "Wijn";
         }else if(questionNumber == 2){
         questionText.text = "Groen, bruin of geel?";
         answerOneButtonText.text = "Groen";
         answerTwoButtonText.text = "Bruin";
         answerThreeButtonText.text = "Geel";
+        answerFourButtonText.text = "Blauw";
         }else if(questionNumber == 3){
         questionText.text = "Links, rechts of rechtdoor?";
         answerOneButtonText.text = "Links";
         answerTwoButtonText.text = "Rechts";
         answerThreeButtonText.text = "Rechtdoor";
+        answerFourButtonText.text = "Achteruit";
         }
         // Zero speed (Pause)
         Time.timeScale = 0f;
@@ -96,6 +100,13 @@ public class QuestionMarkers : MonoBehaviour
     public void clickButtonThree(){
         // -- TBD Smits API data implementatie
         Debug.Log("Third answer clicked.");
+        checkQuestionAnswered();
+        Resume();
+    }
+
+    public void clickButtonFour(){
+        // -- TBD Smits API data implementatie
+        Debug.Log("Fourth answer clicked.");
         checkQuestionAnswered();
         Resume();
     }
