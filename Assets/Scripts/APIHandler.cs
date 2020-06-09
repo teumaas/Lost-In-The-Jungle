@@ -1,52 +1,54 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class APIHandler
+public class APIHandler : MonoBehaviour
 {
-    [SerializeField]
-    private string BaseURL = "https://serious-game-server.herokuapp.com";
+    private string BaseURL = "https://serious-game-server.herokuapp.com/";
 
-    private Level level;
-
-    private string Result;
-
-    public APIHandler()
+    public string StartGame(string id)
     {
-
-    }
-
-    public IEnumerator PostGamePin(string path, string id)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Post(this.BaseURL + path + id, string.Empty))
+        WWWForm body = new WWWForm();
+        string result = string.Empty;
+        
+        StartCoroutine(PostRequest($"play/{id}", body, (UnityWebRequest req) =>
         {
-            // GameObject popup = Instantiate(PopUpPrefab, new Vector3(0, 0), Quaternion.identity) as GameObject;
-            
-            yield return webRequest.SendWebRequest();
-
-            string[] pages = this.BaseURL.Split('/');
-            int page = pages.Length - 1;
-
-            if (webRequest.responseCode == 404)
+            if (req.responseCode == 404)
             {
-                Debug.Log(pages[page] + ": Error: " + webRequest.error);
-
+                Debug.Log($"{req.error}: {req.downloadHandler.text}");
                 //popup.transform.parent = GameObject.Find("PopUpPrefab").transform;
             }
-            else if(webRequest.isNetworkError || webRequest.isHttpError)
+            else if (req.isNetworkError || req.isHttpError)
             {
-                Debug.Log(pages[page] + ": Error: " + webRequest.error);
+                Debug.Log($"{req.error}: {req.downloadHandler.text}");
                 //popup.transform.parent = GameObject.Find("PopUpPrefab").transform;
             }
             else
             {
-                Result = webRequest.downloadHandler.text;
-                level = Level.CreateFromJSON(Result);
-                Debug.Log(level.questions[0].answers[0].answer);
-
-                //Debug.Log(pages[page] + ": Result: " + Result);
+                result = req.downloadHandler.text;
             }
+        }));
+
+        return result;
+    }
+
+    private IEnumerator PostRequest(string path, WWWForm body, Action<UnityWebRequest> callback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Post($"{BaseURL}{path}", body))
+        {
+            yield return request.SendWebRequest();
+            callback(request);
+        }
+    }
+
+    private IEnumerator PutRequest(string path, byte[] body, Action<UnityWebRequest> callback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Put($"{BaseURL}{path}", body))
+        {
+            yield return request.SendWebRequest();
+            callback(request);
         }
     }
 }

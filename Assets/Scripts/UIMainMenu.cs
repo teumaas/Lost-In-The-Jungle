@@ -44,8 +44,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void EnterButton()
     {
-        WWWForm body = new WWWForm();
-
-        StartCoroutine(api.PostGamePin("/play/", InputPIN.GetComponent<TMP_InputField>().text));
+        //Debug.Log(api.StartGame(InputPIN.GetComponent<TMP_InputField>().text));
+        Debug.Log(api.GetPosts());
     }
 }
