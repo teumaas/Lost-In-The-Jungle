@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/TextMesh Pro.meta
 guid: f54d1bd14bd3ca042bd867b519fee8cc
+=======
+guid: 548db4d85ba815c4d828882209cb41d8
+>>>>>>> origin/feature/api+menu:Assets/Prefabs/UI.meta
+=======
+guid: f54d1bd14bd3ca042bd867b519fee8cc
+>>>>>>> origin/feature/api+menu
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

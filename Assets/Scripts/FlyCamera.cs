@@ -23,7 +23,7 @@ public class FlyCamera : MonoBehaviour {
     void Start()
     {
         //Set Cursor to not be visible
-        Cursor.visible = false;
+        Cursor.visible = true;
     }
 
     void Update () {
