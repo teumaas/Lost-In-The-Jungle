@@ -8,6 +8,8 @@ public class APIHandler
     [SerializeField]
     private string BaseURL = "https://serious-game-server.herokuapp.com";
 
+    private Question question;
+
     private string Result;
 
     public APIHandler()
@@ -40,6 +42,8 @@ public class APIHandler
             else
             {
                 Result = webRequest.downloadHandler.text;
+                question = Question.CreateFromJSON(Result);
+                Debug.Log(question.answers[0].answer);
 
                 Debug.Log(pages[page] + ": Result: " + Result);
             }
