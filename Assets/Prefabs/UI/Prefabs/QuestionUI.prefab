@@ -958,7 +958,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'B: Antwoord
+  m_text: 'C: Antwoord
 
 '
   m_isRightToLeft: 0
@@ -1065,7 +1065,7 @@ GameObject:
   - component: {fileID: 5589511322251571601}
   - component: {fileID: 8067156181660006379}
   m_Layer: 5
-  m_Name: ButtonC
+  m_Name: ButtonB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1084,7 +1084,7 @@ RectTransform:
   m_Children:
   - {fileID: 5410221512074960618}
   m_Father: {fileID: 4071233360576565848}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1334,8 +1334,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4681656827908395661}
-  - {fileID: 6950350938969948216}
   - {fileID: 1826676665130186845}
+  - {fileID: 6950350938969948216}
   - {fileID: 4665168963881324446}
   m_Father: {fileID: 2218929966501306098}
   m_RootOrder: 0
@@ -1353,7 +1353,7 @@ GameObject:
   - component: {fileID: 83030071121277428}
   - component: {fileID: 3230147137141219561}
   m_Layer: 5
-  m_Name: ButtonB
+  m_Name: ButtonC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1372,7 +1372,7 @@ RectTransform:
   m_Children:
   - {fileID: 3748853441991372630}
   m_Father: {fileID: 4071233360576565848}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'C: Antwoord
+  m_text: 'B: Antwoord
 
 '
   m_isRightToLeft: 0
