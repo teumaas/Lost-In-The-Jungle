@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class QuestionMarkers : MonoBehaviour
 {
@@ -11,11 +12,11 @@ public class QuestionMarkers : MonoBehaviour
 
     public static bool gameIsPaused = false;
     public GameObject questionUI;
-    public Text questionText;
-    public Text answerOneButtonText;
-    public Text answerTwoButtonText;
-    public Text answerThreeButtonText;
-    public Text answerFourButtonText;
+    public TextMeshProUGUI questionText;
+    public TextMeshProUGUI answerOneButtonText;
+    public TextMeshProUGUI answerTwoButtonText;
+    public TextMeshProUGUI answerThreeButtonText;
+    public TextMeshProUGUI answerFourButtonText;
     public int timerQuestionOne = 26;
     public int timerQuestionTwo = 37;
     public int timerQuestionThree = 53;
