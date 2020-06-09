@@ -4,7 +4,7 @@ using System;
 [Serializable]
 public class Question
 {
-	public List<Answer> answers;
+	public List<Answer>;
 	public string _id;
 	public string question;
 }
