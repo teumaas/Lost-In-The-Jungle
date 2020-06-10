@@ -28,15 +28,8 @@ public class QuestionMarkers : MonoBehaviour
 
     private Level levelData;
 
-    public void LoadData(string data)
-    {
-        levelData = Level.CreateFromJSON(data);
-        Debug.Log("LoadData called");
-        Debug.Log(levelData);
-    }
-
     void Start() {
-        levelData = GameController.levelData;
+        levelData = GameController.getLevelData();
     }
 
     // Update is called once per frame

@@ -1,13 +1,26 @@
-﻿using UnityEngine;
+﻿using UnityEngine.SceneManagement;
 
 public static class GameController
 {
-    public static Level levelData;
+    private static Level levelData;    
 
-    public static void LoadData(string data) {
-        levelData = Level.CreateFromJSON(data);
-        Debug.Log("LoadData called");
-        Debug.Log(levelData);
+    public static void loadRuins(Level level) {
+        levelData = level;
+        SceneManager.LoadScene(0);
+    }
+
+    public static void loadVillage(Level level) {
+        levelData = level;
+        SceneManager.LoadScene(1);
+    }
+
+    public static void loadForestFire(Level level) {
+        levelData = level;
+        SceneManager.LoadScene(2);
+    }
+
+    public static Level getLevelData() {
+        return levelData;
     }
 }
 

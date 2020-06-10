@@ -7,12 +7,26 @@ public class APIHandler : MonoBehaviour
 {
     private string BaseURL = "https://serious-game-server.herokuapp.com/";
 
-    public void GamePost(string endpoint, string id, Action<UnityWebRequest> callback) {
-        GamePost(endpoint, id, callback, new WWWForm());
-    }
+    //Post without predefined WWWForm body
+    public void GamePost(string endpoint, string id, Action<string> resolve, Action<string> reject) {
+        GamePost(endpoint, id, resolve, reject, new WWWForm());
+    } 
 
-    public void GamePost(string endpoint, string id, Action<UnityWebRequest> callback, WWWForm body) {
-        StartCoroutine(PostRequest($"{endpoint}/{id}", body, callback));
+    //Post with predefined WWWForm body
+    public void GamePost(string endpoint, string id, Action<string> resolve, Action<string> reject, WWWForm body) {
+        StartCoroutine(PostRequest($"{endpoint}/{id}", body, (result) => {
+            if (result.responseCode == 404) {
+                reject($"{result.error}: {result.downloadHandler.text}");
+                Debug.Log($"{result.error}: {result.downloadHandler.text}");
+            }
+            else if (result.isNetworkError || result.isHttpError) {
+                reject($"{result.error}: {result.downloadHandler.text}");
+                Debug.Log($"{result.error}: {result.downloadHandler.text}");
+            }
+            else {
+                resolve(result.downloadHandler.text);
+            }
+        }));
     }
 
     private IEnumerator PostRequest(string path, WWWForm body, Action<UnityWebRequest> callback) {
