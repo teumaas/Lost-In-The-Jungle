@@ -47,6 +47,19 @@ public class UIMainMenu : MonoBehaviour
         //Debug.Log(api.StartGame(InputPIN.GetComponent<TMP_InputField>().text));
         //popup.transform.parent = GameObject.Find("PopUpPrefab").transform;
 
-        Api.StartGame(InputPIN.GetComponent<TMP_InputField>().text);
+        Api.StartGame(InputPIN.GetComponent<TMP_InputField>().text, (result) => {
+            if (result.responseCode == 404) {
+                //TODO Scherm laten zien dat de error code incorrect is
+                Debug.Log($"{result.error}: {result.downloadHandler.text}");
+            }
+            else if (result.isNetworkError || result.isHttpError) {
+                //TODO Scherm laten zien dat ze de verbinding moeten controleren
+                Debug.Log($"{result.error}: {result.downloadHandler.text}");
+            }
+            else {
+                //TODO Ga naar de startscheme met de vragen uit de result
+                Debug.Log(result.downloadHandler.text);
+            }
+        });
     }
 }
