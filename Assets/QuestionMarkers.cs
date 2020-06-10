@@ -7,26 +7,33 @@ using UnityEngine.SceneManagement;
 
 public class QuestionMarkers : MonoBehaviour
 {
-    public bool questionOneAnswered = false;
-    public bool questionTwoAnswered = false;
-    public bool questionThreeAnswered = false;
-    public bool questionFourAnswered = false;
-    public bool questionFiveAnswered = false;
+    private bool questionOneAnswered = false;
+    private bool questionTwoAnswered = false;
+    private bool questionThreeAnswered = false;
+    private bool questionFourAnswered = false;
+    private bool questionFiveAnswered = false;
 
-    public static bool gameIsPaused = false;
-    public GameObject questionUI;
-    public TextMeshProUGUI questionText;
-    public TextMeshProUGUI answerOneButtonText;
-    public TextMeshProUGUI answerTwoButtonText;
-    public TextMeshProUGUI answerThreeButtonText;
-    public TextMeshProUGUI answerFourButtonText;
-    public int timerQuestionOne = 3;
-    public int timerQuestionTwo = 26;
-    public int timerQuestionThree = 37;
-    public int timerQuestionFour = 53;
-    public int timerQuestionFive = 60;
+    private bool gameIsPaused = false;
+    private GameObject questionUI;
+    private TextMeshProUGUI questionText;
+    private TextMeshProUGUI answerOneButtonText;
+    private TextMeshProUGUI answerTwoButtonText;
+    private TextMeshProUGUI answerThreeButtonText;
+    private TextMeshProUGUI answerFourButtonText;
+
+    [SerializeField]
+    private int timerQuestionOne = 3;
+    [SerializeField]
+    private int timerQuestionTwo = 26;
+    [SerializeField]
+    private int timerQuestionThree = 37;
+    [SerializeField]
+    private int timerQuestionFour = 53;
+    [SerializeField]
+    private int timerQuestionFive = 60;
 
     private Level levelData;
+    private Dictionary<string, string> responses = new Dictionary<string, string>();
 
     void Start() {
         levelData = GameController.getLevelData();
@@ -64,48 +71,22 @@ public class QuestionMarkers : MonoBehaviour
             gameIsPaused = false;
         }
 
-    void Pause(int questionNumber){
+    void Pause(int questionNumber)
+    {
         questionUI.SetActive(true);
-        // Update met dummy data -- TBD Smits API data implementatie
-        if(questionNumber == 1){
-            Debug.Log(levelData);
-            Debug.Log("Question one reached!");
-            questionText.text = levelData.questions[0].question;
-            answerOneButtonText.text = levelData.questions[0].answers[0].answer;
-            answerTwoButtonText.text = levelData.questions[0].answers[1].answer;
-            answerThreeButtonText.text = levelData.questions[0].answers[2].answer;
-            answerFourButtonText.text = levelData.questions[0].answers[3].answer;
-        }else if(questionNumber == 2){
-        questionText.text = "Groen, bruin of geel?";
-        answerOneButtonText.text = "Groen";
-        answerTwoButtonText.text = "Bruin";
-        answerThreeButtonText.text = "Geel";
-        answerFourButtonText.text = "Blauw";
-        }else if(questionNumber == 3){
-        questionText.text = "Links, rechts of rechtdoor?";
-        answerOneButtonText.text = "Links";
-        answerTwoButtonText.text = "Rechts";
-        answerThreeButtonText.text = "Rechtdoor";
-        answerFourButtonText.text = "Achteruit";
-        }else if(questionNumber == 4){
-        questionText.text = "Groen, bruin of geel?";
-        answerOneButtonText.text = "Groen";
-        answerTwoButtonText.text = "Bruin";
-        answerThreeButtonText.text = "Geel";
-        answerFourButtonText.text = "Blauw";
-        }else if(questionNumber == 5){
-        questionText.text = "Bier, koffie of thee?";
-        answerOneButtonText.text = "Bier";
-        answerTwoButtonText.text = "Koffie";
-        answerThreeButtonText.text = "Thee";
-        answerFourButtonText.text = "Wijn";
-        }
+
+        questionText.text = levelData.questions[questionNumber - 1].question;
+        answerOneButtonText.text = levelData.questions[questionNumber - 1].answers[0].answer;
+        answerTwoButtonText.text = levelData.questions[questionNumber - 1].answers[1].answer;
+        answerThreeButtonText.text = levelData.questions[questionNumber - 1].answers[2].answer;
+        answerFourButtonText.text = levelData.questions[questionNumber - 1].answers[3].answer;
+
         // Zero speed (Pause)
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
 
-    void checkQuestionAnswered(){
+    void MarkQuestionAnswered(){
         if(Time.timeSinceLevelLoad >= (timerQuestionOne - 1)){
             questionOneAnswered = true;
         }
@@ -126,28 +107,29 @@ public class QuestionMarkers : MonoBehaviour
     public void clickButtonOne(){
         // -- TBD Smits API data implementatie
         Debug.Log("First answer clicked.");
-        checkQuestionAnswered();
+        MarkQuestionAnswered();
+        responses
         Resume();
     }
 
     public void clickButtonTwo(){
         // -- TBD Smits API data implementatie
         Debug.Log("Second answer clicked.");
-        checkQuestionAnswered();
+        MarkQuestionAnswered();
         Resume();
     }
 
     public void clickButtonThree(){
         // -- TBD Smits API data implementatie
         Debug.Log("Third answer clicked.");
-        checkQuestionAnswered();
+        MarkQuestionAnswered();
         Resume();
     }
 
     public void clickButtonFour(){
         // -- TBD Smits API data implementatie
         Debug.Log("Fourth answer clicked.");
-        checkQuestionAnswered();
+        MarkQuestionAnswered();
         Resume();
     }
 
