@@ -31,6 +31,12 @@ public class QuestionMarkers : MonoBehaviour
     public void LoadData(string data)
     {
         levelData = Level.CreateFromJSON(data);
+        Debug.Log("LoadData called");
+        Debug.Log(levelData);
+    }
+
+    void Start() {
+        levelData = GameController.levelData;
     }
 
     // Update is called once per frame
@@ -69,11 +75,13 @@ public class QuestionMarkers : MonoBehaviour
         questionUI.SetActive(true);
         // Update met dummy data -- TBD Smits API data implementatie
         if(questionNumber == 1){
-        questionText.text = levelData.questions[0].question;
-        answerOneButtonText.text = levelData.questions[0].answers[0].answer;
-        answerTwoButtonText.text = levelData.questions[0].answers[1].answer;
-        answerThreeButtonText.text = levelData.questions[0].answers[2].answer;
-        answerFourButtonText.text = levelData.questions[0].answers[3].answer;
+            Debug.Log(levelData);
+            Debug.Log("Question one reached!");
+            questionText.text = levelData.questions[0].question;
+            answerOneButtonText.text = levelData.questions[0].answers[0].answer;
+            answerTwoButtonText.text = levelData.questions[0].answers[1].answer;
+            answerThreeButtonText.text = levelData.questions[0].answers[2].answer;
+            answerFourButtonText.text = levelData.questions[0].answers[3].answer;
         }else if(questionNumber == 2){
         questionText.text = "Groen, bruin of geel?";
         answerOneButtonText.text = "Groen";

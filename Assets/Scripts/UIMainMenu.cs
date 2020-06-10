@@ -61,8 +61,8 @@ public class UIMainMenu : MonoBehaviour
             }
             else {
                 //TODO Ga naar de startscheme met de vragen uit de result
+                GameController.LoadData(result.downloadHandler.text);
                 SceneManager.LoadScene(2);
-                QuestionMarkers.LoadData(result.downloadHandler.text);
             }
         });
     }
