@@ -8,30 +8,26 @@ public class APIHandler : MonoBehaviour
 {
     private string BaseURL = "https://serious-game-server.herokuapp.com/";
 
-    public string StartGame(string id)
+    public void StartGame(string id)
     {
-        WWWForm body = new WWWForm();
-        string result = string.Empty;
-        
+        WWWForm body = new WWWForm(); 
+
         StartCoroutine(PostRequest($"play/{id}", body, (UnityWebRequest req) =>
         {
             if (req.responseCode == 404)
             {
                 Debug.Log($"{req.error}: {req.downloadHandler.text}");
-                //popup.transform.parent = GameObject.Find("PopUpPrefab").transform;
             }
             else if (req.isNetworkError || req.isHttpError)
             {
                 Debug.Log($"{req.error}: {req.downloadHandler.text}");
-                //popup.transform.parent = GameObject.Find("PopUpPrefab").transform;
             }
             else
             {
-                result = req.downloadHandler.text;
+                // Dit doet nu niks.
+                Debug.Log(req.downloadHandler.text);
             }
         }));
-
-        return result;
     }
 
     private IEnumerator PostRequest(string path, WWWForm body, Action<UnityWebRequest> callback)

@@ -14,11 +14,11 @@ public class UIMainMenu : MonoBehaviour
     private GameObject InputPIN;
     private GameObject ButtonEnter;
 
-    private APIHandler api;
+    private APIHandler Api;
     // Start is called before the first frame update
     void Start()
     {
-        api = new APIHandler();
+        Api = gameObject.AddComponent<APIHandler>();
         EnterPinMenu = GameObject.FindGameObjectWithTag("EnterPinMenu");
         InputPIN = GameObject.FindGameObjectWithTag("InputPIN");
         ButtonEnter = GameObject.FindGameObjectWithTag("ButtonEnter");
@@ -45,6 +45,8 @@ public class UIMainMenu : MonoBehaviour
     public void EnterButton()
     {
         //Debug.Log(api.StartGame(InputPIN.GetComponent<TMP_InputField>().text));
-        Debug.Log(api.GetPosts());
+        //popup.transform.parent = GameObject.Find("PopUpPrefab").transform;
+
+        Api.StartGame(InputPIN.GetComponent<TMP_InputField>().text);
     }
 }
