@@ -14,7 +14,7 @@ public class QuestionMarkers : MonoBehaviour
     private bool questionFiveAnswered = false;
 
     private bool gameIsPaused = false;
-    private GameObject questionUI;
+    public GameObject questionUI;
     private TextMeshProUGUI questionText;
     private TextMeshProUGUI answerOneButtonText;
     private TextMeshProUGUI answerTwoButtonText;
@@ -66,6 +66,7 @@ public class QuestionMarkers : MonoBehaviour
 
     void Resume(){
             questionUI.SetActive(false);
+            Debug.Log(responses);
             // Normal speed
             Time.timeScale = 1f;
             gameIsPaused = false;
@@ -107,14 +108,57 @@ public class QuestionMarkers : MonoBehaviour
     public void clickButtonOne(){
         // -- TBD Smits API data implementatie
         Debug.Log("First answer clicked.");
+        int a = 0;
+        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
+            a = 1;
+        }
+        // Question two trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
+            a = 2;
+        }
+        // Question three trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
+            a = 3;
+        }
+        // Question four trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
+            a = 4;
+        }
+        // Question five trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
+            a = 5;
+        }
+
+        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[0]._id);
         MarkQuestionAnswered();
-        responses
         Resume();
     }
 
     public void clickButtonTwo(){
         // -- TBD Smits API data implementatie
         Debug.Log("Second answer clicked.");
+        int a = 0;
+        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
+            a = 1;
+        }
+        // Question two trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
+            a = 2;
+        }
+        // Question three trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
+            a = 3;
+        }
+        // Question four trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
+            a = 4;
+        }
+        // Question five trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
+            a = 5;
+        }
+
+        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[1]._id);
         MarkQuestionAnswered();
         Resume();
     }
@@ -122,6 +166,28 @@ public class QuestionMarkers : MonoBehaviour
     public void clickButtonThree(){
         // -- TBD Smits API data implementatie
         Debug.Log("Third answer clicked.");
+        int a = 0;
+        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
+            a = 1;
+        }
+        // Question two trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
+            a = 2;
+        }
+        // Question three trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
+            a = 3;
+        }
+        // Question four trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
+            a = 4;
+        }
+        // Question five trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
+            a = 5;
+        }
+
+        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[2]._id);
         MarkQuestionAnswered();
         Resume();
     }
@@ -129,6 +195,28 @@ public class QuestionMarkers : MonoBehaviour
     public void clickButtonFour(){
         // -- TBD Smits API data implementatie
         Debug.Log("Fourth answer clicked.");
+        int a = 0;
+        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
+            a = 1;
+        }
+        // Question two trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
+            a = 2;
+        }
+        // Question three trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
+            a = 3;
+        }
+        // Question four trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
+            a = 4;
+        }
+        // Question five trigger
+        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
+            a = 5;
+        }
+
+        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[3]._id);
         MarkQuestionAnswered();
         Resume();
     }
