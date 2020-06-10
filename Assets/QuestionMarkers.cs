@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class QuestionMarkers : MonoBehaviour
 {
@@ -24,6 +25,13 @@ public class QuestionMarkers : MonoBehaviour
     public int timerQuestionThree = 37;
     public int timerQuestionFour = 53;
     public int timerQuestionFive = 60;
+
+    private Level levelData;
+
+    public void LoadData(string data)
+    {
+        levelData = Level.CreateFromJSON(data);
+    }
 
     // Update is called once per frame
     void Update()
@@ -61,11 +69,11 @@ public class QuestionMarkers : MonoBehaviour
         questionUI.SetActive(true);
         // Update met dummy data -- TBD Smits API data implementatie
         if(questionNumber == 1){
-        questionText.text = "Bier, koffie of thee?";
-        answerOneButtonText.text = "Bier";
-        answerTwoButtonText.text = "Koffie";
-        answerThreeButtonText.text = "Thee";
-        answerFourButtonText.text = "Wijn";
+        questionText.text = levelData.questions[0].question;
+        answerOneButtonText.text = levelData.questions[0].answers[0].answer;
+        answerTwoButtonText.text = levelData.questions[0].answers[1].answer;
+        answerThreeButtonText.text = levelData.questions[0].answers[2].answer;
+        answerFourButtonText.text = levelData.questions[0].answers[3].answer;
         }else if(questionNumber == 2){
         questionText.text = "Groen, bruin of geel?";
         answerOneButtonText.text = "Groen";

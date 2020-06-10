@@ -7,12 +7,12 @@ public class APIHandler : MonoBehaviour
 {
     private string BaseURL = "https://serious-game-server.herokuapp.com/";
 
-    public void StartGame(string id, Action<UnityWebRequest> callback) {
-        StartGame(id, callback, new WWWForm());
+    public void GamePost(string endpoint, string id, Action<UnityWebRequest> callback) {
+        GamePost(endpoint, id, callback, new WWWForm());
     }
 
-    public void StartGame(string id, Action<UnityWebRequest> callback, WWWForm body) {
-        StartCoroutine(PostRequest($"play/{id}", body, callback));
+    public void GamePost(string endpoint, string id, Action<UnityWebRequest> callback, WWWForm body) {
+        StartCoroutine(PostRequest($"{endpoint}/{id}", body, callback));
     }
 
     private IEnumerator PostRequest(string path, WWWForm body, Action<UnityWebRequest> callback) {

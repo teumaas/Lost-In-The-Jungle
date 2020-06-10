@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
@@ -14,10 +15,12 @@ public class UIMainMenu : MonoBehaviour
     private GameObject InputPIN;
     private GameObject ButtonEnter;
 
+    private QuestionMarkers QuestionMarkers;
     private APIHandler Api;
-    // Start is called before the first frame update
+
     void Start()
     {
+        QuestionMarkers = gameObject.AddComponent<QuestionMarkers>();
         Api = gameObject.AddComponent<APIHandler>();
         EnterPinMenu = GameObject.FindGameObjectWithTag("EnterPinMenu");
         InputPIN = GameObject.FindGameObjectWithTag("InputPIN");
@@ -47,7 +50,7 @@ public class UIMainMenu : MonoBehaviour
         //Debug.Log(api.StartGame(InputPIN.GetComponent<TMP_InputField>().text));
         //popup.transform.parent = GameObject.Find("PopUpPrefab").transform;
 
-        Api.StartGame(InputPIN.GetComponent<TMP_InputField>().text, (result) => {
+        Api.GamePost("play", InputPIN.GetComponent<TMP_InputField>().text, (result) => {
             if (result.responseCode == 404) {
                 //TODO Scherm laten zien dat de error code incorrect is
                 Debug.Log($"{result.error}: {result.downloadHandler.text}");
@@ -58,7 +61,8 @@ public class UIMainMenu : MonoBehaviour
             }
             else {
                 //TODO Ga naar de startscheme met de vragen uit de result
-                Debug.Log(result.downloadHandler.text);
+                SceneManager.LoadScene(2);
+                QuestionMarkers.LoadData(result.downloadHandler.text);
             }
         });
     }
