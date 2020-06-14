@@ -52,6 +52,8 @@ public class APIHandler : MonoBehaviour
 
     private IEnumerator PostRequest(string path, WWWForm body, Action<UnityWebRequest> callback) {
         using (UnityWebRequest request = UnityWebRequest.Post($"{BaseURL}{path}", body)) {
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Accept", "application/json");
             yield return request.SendWebRequest();
             callback(request);
         }
@@ -59,6 +61,8 @@ public class APIHandler : MonoBehaviour
 
     private IEnumerator PutRequest(string path, string body, Action<UnityWebRequest> callback) {
         using (UnityWebRequest request = UnityWebRequest.Put($"{BaseURL}{path}", body)) {
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Accept", "application/json");
             yield return request.SendWebRequest();
             callback(request);
         }
