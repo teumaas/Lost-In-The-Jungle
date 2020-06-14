@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class UIPopUp : MonoBehaviour
+public class UIFunctions : MonoBehaviour
 {
     private GameObject PopUpPrefab;
 
@@ -22,5 +23,9 @@ public class UIPopUp : MonoBehaviour
     public void Close()
     { 
         Destroy(this.gameObject);
+    }
+
+    public void ExitGame() {
+        SceneManager.LoadScene(0);
     }
 }

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0d6f8189384574c41a55d729bf96bbe7
+  - enabled: 1
     path: Assets/Scenes/Jungle_Ruin.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1

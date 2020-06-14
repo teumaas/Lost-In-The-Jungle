@@ -4,221 +4,129 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Assets.Scripts.Serializer.Post;
+using Assets.Scripts.Serializer.Put;
 
 public class QuestionMarkers : MonoBehaviour
 {
-    private bool questionOneAnswered = false;
-    private bool questionTwoAnswered = false;
-    private bool questionThreeAnswered = false;
-    private bool questionFourAnswered = false;
-    private bool questionFiveAnswered = false;
-
-    private bool gameIsPaused = false;
-    public GameObject questionUI;
-    private TextMeshProUGUI questionText;
-    private TextMeshProUGUI answerOneButtonText;
-    private TextMeshProUGUI answerTwoButtonText;
-    private TextMeshProUGUI answerThreeButtonText;
-    private TextMeshProUGUI answerFourButtonText;
-
-    [SerializeField]
-    private int timerQuestionOne = 3;
-    [SerializeField]
-    private int timerQuestionTwo = 26;
-    [SerializeField]
-    private int timerQuestionThree = 37;
-    [SerializeField]
-    private int timerQuestionFour = 53;
-    [SerializeField]
-    private int timerQuestionFive = 60;
-
+    private APIHandler Api;
     private Level levelData;
+    private Game gameData;
+    private bool gameIsPaused = false;
     private Dictionary<string, string> responses = new Dictionary<string, string>();
 
-    void Start() {
+    [SerializeField]
+    private GameObject questionUI;
+    [SerializeField]
+    private TextMeshProUGUI[] textQuestion = new TextMeshProUGUI[5];
+    [SerializeField]
+    private int[] timerQuestion = new int[] { 3, 5, 7, 9, 11 };
+    [SerializeField]
+    private bool[] questionAnswered = new bool[] { false, false, false, false, false };
+
+    void Start()
+    {
         levelData = GameController.getLevelData();
+        Api = gameObject.AddComponent<APIHandler>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Question one trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
-            Pause(1);
-        }
-        // Question two trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
-            Pause(2);
-        }
-        // Question three trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
-            Pause(3);
-        }
-        // Question four trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
-            Pause(4);
-        }
-        // Question five trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
-            Pause(5);
+        for (int i = 0; i < 5; i++)
+        {
+            if (Time.timeSinceLevelLoad >= timerQuestion[i] && questionAnswered[i] == false)
+            {
+                Pause(i + 1);
+            }
         }
     }
+    private void Resume()
+    {
+        questionUI.SetActive(false);
 
-    void Resume(){
-            questionUI.SetActive(false);
-            Debug.Log(responses);
-            // Normal speed
-            Time.timeScale = 1f;
-            gameIsPaused = false;
-        }
+        // Normal speed
+        Time.timeScale = 10f;
+        gameIsPaused = false;
+    }
 
-    void Pause(int questionNumber)
+    private void Pause(int questionNumber)
     {
         questionUI.SetActive(true);
-
-        questionText.text = levelData.questions[questionNumber - 1].question;
-        answerOneButtonText.text = levelData.questions[questionNumber - 1].answers[0].answer;
-        answerTwoButtonText.text = levelData.questions[questionNumber - 1].answers[1].answer;
-        answerThreeButtonText.text = levelData.questions[questionNumber - 1].answers[2].answer;
-        answerFourButtonText.text = levelData.questions[questionNumber - 1].answers[3].answer;
+        textQuestion[0].text = levelData.questions[questionNumber - 1].question;
+        for (int i = 1; i < 5; i++)
+        {
+            textQuestion[i].text = levelData.questions[questionNumber - 1].answers[i - 1].answer;
+        }
 
         // Zero speed (Pause)
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
 
-    void MarkQuestionAnswered(){
-        if(Time.timeSinceLevelLoad >= (timerQuestionOne - 1)){
-            questionOneAnswered = true;
-        }
-        if(Time.timeSinceLevelLoad >= (timerQuestionTwo - 1)){
-            questionTwoAnswered = true;
-        }
-        if(Time.timeSinceLevelLoad >= (timerQuestionThree - 1)){
-            questionThreeAnswered = true;
-        }
-        if(Time.timeSinceLevelLoad >= (timerQuestionFour - 1)){
-            questionFourAnswered = true;
-        }
-        if(Time.timeSinceLevelLoad >= (timerQuestionFive - 1)){
-            questionFiveAnswered = true;
+    private void MarkQuestionAnswered()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (Time.timeSinceLevelLoad >= (timerQuestion[i] - 1))
+            {
+                questionAnswered[i] = true;
+            }
         }
     }
 
-    public void clickButtonOne(){
-        // -- TBD Smits API data implementatie
-        Debug.Log("First answer clicked.");
-        int a = 0;
-        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
-            a = 1;
-        }
-        // Question two trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
-            a = 2;
-        }
-        // Question three trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
-            a = 3;
-        }
-        // Question four trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
-            a = 4;
-        }
-        // Question five trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
-            a = 5;
+    public void clickQuestionButton(int numberQuestion)
+    {
+        Debug.Log($"{numberQuestion + 1} answer clicked.");
+        int selectedAnswer = 0;
+
+        for (int answer = 0; answer < 5; answer++)
+        {
+            if (Time.timeSinceLevelLoad >= timerQuestion[answer] && !(answer > 5) && questionAnswered[answer] == false)
+            {
+                selectedAnswer = answer;
+            }
         }
 
-        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[0]._id);
-        MarkQuestionAnswered();
-        Resume();
+        responses.Add(levelData.questions[selectedAnswer]._id, levelData.questions[selectedAnswer].answers[numberQuestion]._id);
+
+        if (responses.Count < 5)
+        {
+            MarkQuestionAnswered();
+            Resume();
+        }
+        else
+        {
+            SubmitAnswers();
+        }
     }
 
-    public void clickButtonTwo(){
-        // -- TBD Smits API data implementatie
-        Debug.Log("Second answer clicked.");
-        int a = 0;
-        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
-            a = 1;
-        }
-        // Question two trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
-            a = 2;
-        }
-        // Question three trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
-            a = 3;
-        }
-        // Question four trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
-            a = 4;
-        }
-        // Question five trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
-            a = 5;
-        }
-
-        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[1]._id);
-        MarkQuestionAnswered();
-        Resume();
+    // TODO: Netjes de sessie afsluiten.
+    public static void ExitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
-    public void clickButtonThree(){
-        // -- TBD Smits API data implementatie
-        Debug.Log("Third answer clicked.");
-        int a = 0;
-        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
-            a = 1;
-        }
-        // Question two trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
-            a = 2;
-        }
-        // Question three trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
-            a = 3;
-        }
-        // Question four trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
-            a = 4;
-        }
-        // Question five trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
-            a = 5;
+    public void SubmitAnswers()
+    {
+        string body = "";
+
+        gameData = new Game();
+        gameData.level = levelData.level;
+
+        foreach (KeyValuePair<string, string> item in responses)
+        {
+            gameData.answers.Add(new Assets.Scripts.Serializer.Put.Answer(item.Key, item.Value));
         }
 
-        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[2]._id);
-        MarkQuestionAnswered();
-        Resume();
+        body = JsonUtility.ToJson(gameData);
+
+        Api.GamePut("play", levelData.playID, (result) =>
+        {
+            GameController.loadForestFire(Level.CreateFromJSON(result));
+        }, (error) =>
+        {
+            //TODO handle error correctly (show popup?)
+        }, body);
     }
-
-    public void clickButtonFour(){
-        // -- TBD Smits API data implementatie
-        Debug.Log("Fourth answer clicked.");
-        int a = 0;
-        if(Time.timeSinceLevelLoad >= timerQuestionOne && questionOneAnswered == false){
-            a = 1;
-        }
-        // Question two trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionTwo && questionTwoAnswered == false){
-            a = 2;
-        }
-        // Question three trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionThree && questionThreeAnswered == false){
-            a = 3;
-        }
-        // Question four trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFour && questionFourAnswered == false){
-            a = 4;
-        }
-        // Question five trigger
-        if(Time.timeSinceLevelLoad >= timerQuestionFive && questionFiveAnswered == false){
-            a = 5;
-        }
-
-        responses.Add(levelData.questions[a - 1]._id, levelData.questions[a - 1].answers[3]._id);
-        MarkQuestionAnswered();
-        Resume();
-    }
-
 }

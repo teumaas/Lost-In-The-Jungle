@@ -29,6 +29,27 @@ public class APIHandler : MonoBehaviour
         }));
     }
 
+    public void GamePut(string endpoint, string id, Action<string> resolve, Action<string> reject) {
+        GamePut(endpoint, id, resolve, reject, string.Empty);
+    } 
+    public void GamePut(string endpoint, string id, Action<string> resolve, Action<string> reject, string body)
+    {
+        StartCoroutine(PutRequest($"{endpoint}/{id}", body, (result) => {
+            if (result.responseCode == 404) {
+                reject($"{result.error}: {result.downloadHandler.text}");
+                Debug.Log($"{result.error}: {result.downloadHandler.text}");
+            }
+            else if (result.isNetworkError || result.isHttpError) {
+                reject($"{result.error}: {result.downloadHandler.text}");
+                Debug.Log($"{result.error}: {result.downloadHandler.text}");
+
+            }
+            else {
+                resolve(result.downloadHandler.text);
+            }
+        }));
+    }
+
     private IEnumerator PostRequest(string path, WWWForm body, Action<UnityWebRequest> callback) {
         using (UnityWebRequest request = UnityWebRequest.Post($"{BaseURL}{path}", body)) {
             yield return request.SendWebRequest();
@@ -36,7 +57,7 @@ public class APIHandler : MonoBehaviour
         }
     }
 
-    private IEnumerator PutRequest(string path, byte[] body, Action<UnityWebRequest> callback) {
+    private IEnumerator PutRequest(string path, string body, Action<UnityWebRequest> callback) {
         using (UnityWebRequest request = UnityWebRequest.Put($"{BaseURL}{path}", body)) {
             yield return request.SendWebRequest();
             callback(request);
