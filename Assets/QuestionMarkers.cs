@@ -107,26 +107,32 @@ public class QuestionMarkers : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void SubmitAnswers()
-    {
-        string body = "";
-
+    public void SubmitAnswers() {
         gameData = new Game();
         gameData.level = levelData.level;
 
-        foreach (KeyValuePair<string, string> item in responses)
-        {
+        foreach (KeyValuePair<string, string> item in responses) {
             gameData.answers.Add(new Assets.Scripts.Serializer.Put.Answer(item.Key, item.Value));
         }
 
-        body = JsonUtility.ToJson(gameData);
-
-        Api.GamePut("play", levelData.playID, (result) =>
-        {
-            GameController.loadForestFire(Level.CreateFromJSON(result));
-        }, (error) =>
-        {
+        Api.GamePut("play", levelData.playID, (result) => {
+            Level l = Level.CreateFromJSON(result);
+            switch (l.level) {
+                case 1:
+                    GameController.loadForestFire(l);
+                    break;
+                case 2:
+                    GameController.loadVillage(l);
+                    break;
+                case 3:
+                    GameController.loadRuins(l);
+                    break;
+                default:
+                    GameController.loadMainMenu();
+                    break;
+            }
+        }, (error) => {
             //TODO handle error correctly (show popup?)
-        }, body);
+        }, JsonUtility.ToJson(gameData));
     }
 }
