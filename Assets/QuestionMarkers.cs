@@ -14,7 +14,9 @@ public class QuestionMarkers : MonoBehaviour
     private Game gameData;
     private bool gameIsPaused = false;
     private Dictionary<string, string> responses = new Dictionary<string, string>();
-
+    
+    [SerializeField]
+    private GameObject PopUpPrefabDone;
     [SerializeField]
     private GameObject questionUI;
     [SerializeField]
@@ -28,6 +30,7 @@ public class QuestionMarkers : MonoBehaviour
     {
         levelData = GameController.getLevelData();
         Api = gameObject.AddComponent<APIHandler>();
+        PopUpPrefabDone = GameObject.Find("PopUpPrefabDone");
     }
 
     // Update is called once per frame
@@ -129,6 +132,7 @@ public class QuestionMarkers : MonoBehaviour
                     break;
                 default:
                     GameController.loadMainMenu();
+                    Instantiate(PopUpPrefabDone, new Vector3(0, 0, 0), Quaternion.identity);
                     break;
             }
         }, (error) => {

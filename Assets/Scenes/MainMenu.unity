@@ -1416,8 +1416,8 @@ GameObject:
   - component: {fileID: 2023630252}
   - component: {fileID: 2023630251}
   - component: {fileID: 2023630250}
-  - component: {fileID: 2023630254}
   - component: {fileID: 2023630255}
+  - component: {fileID: 2023630254}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1519,7 +1519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f141771c1e91cd458361b2755aecf5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PopUpPrefab: {fileID: 9188485033798830537, guid: 71a4d91bb5256394b9ac86018815e007,
+  PopUpPrefab404: {fileID: 9188485033798830537, guid: 71a4d91bb5256394b9ac86018815e007,
     type: 3}
 --- !u!114 &2023630255
 MonoBehaviour:

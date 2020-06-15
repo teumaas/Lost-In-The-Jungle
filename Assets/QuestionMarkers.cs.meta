@@ -3,7 +3,11 @@ guid: c4a0d634cadb4464481d938fbc5c88de
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - PopUpPrefab: {fileID: 9188485033798830537, guid: 043c2908da2000000d3c2908da200000,
+      type: 3}
+  - questionUI: {fileID: 9188485033798830537, guid: 043c2908da2000000d3c2908da200000,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
