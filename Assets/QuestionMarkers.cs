@@ -46,7 +46,7 @@ public class QuestionMarkers : MonoBehaviour
         questionUI.SetActive(false);
 
         // Normal speed
-        Time.timeScale = 1f;
+        Time.timeScale = 10f;
         gameIsPaused = false;
     }
 
