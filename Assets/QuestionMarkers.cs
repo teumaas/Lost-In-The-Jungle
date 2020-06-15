@@ -129,7 +129,7 @@ public class QuestionMarkers : MonoBehaviour
                     GameController.loadRuins(l);
                     break;
                 default:
-                    GameController.loadGameComplete();
+                    SceneManager.LoadScene(4);
                     break;
             }
         }, (error) => {
