@@ -23,6 +23,11 @@ public static class GameController
         SceneManager.LoadScene(3);
     }
 
+    public static void loadGameComplete(Level level) {
+        levelData = level;
+        SceneManager.LoadScene(4);
+    }
+
     public static Level getLevelData() {
         return levelData;
     }

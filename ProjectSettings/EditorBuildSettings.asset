@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForestAblaze.unity
     guid: 91e075effa5e5aa419dbbc8834575037
+  - enabled: 1
+    path: Assets/Scenes/GameComplete.unity
+    guid: 833c24e9b0caef0448e63ea65f80b4aa
   m_configObjects: {}

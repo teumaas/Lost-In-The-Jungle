@@ -129,8 +129,7 @@ public class QuestionMarkers : MonoBehaviour
                     GameController.loadRuins(l);
                     break;
                 default:
-                    Instantiate(PopUpPrefabDone, new Vector3(0, 0, 0), Quaternion.identity);
-                    GameController.loadMainMenu();
+                    GameController.loadGameComplete();
                     break;
             }
         }, (error) => {
