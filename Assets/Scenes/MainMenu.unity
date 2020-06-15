@@ -1416,8 +1416,8 @@ GameObject:
   - component: {fileID: 2023630252}
   - component: {fileID: 2023630251}
   - component: {fileID: 2023630250}
-  - component: {fileID: 2023630255}
   - component: {fileID: 2023630254}
+  - component: {fileID: 2023630255}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged

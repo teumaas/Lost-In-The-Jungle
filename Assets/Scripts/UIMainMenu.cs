@@ -15,7 +15,6 @@ public class UIMainMenu : MonoBehaviour {
         EnterPinMenu = GameObject.FindGameObjectWithTag("EnterPinMenu");
         InputPIN = GameObject.FindGameObjectWithTag("InputPIN");
         ButtonEnter = GameObject.FindGameObjectWithTag("ButtonEnter");
-        PopUpPrefab404 = GameObject.Find("PopUpPrefab404");
 
         Api = gameObject.AddComponent<APIHandler>();
     }

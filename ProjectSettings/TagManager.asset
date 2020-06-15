@@ -20,6 +20,7 @@ TagManager:
   - SelectMenu
   - DepartmentsDropDown
   - PopUpDone
+  - PopUp404
   layers:
   - Default
   - TransparentFX

@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a0d634cadb4464481d938fbc5c88de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PopUpPrefab: {fileID: 9188485033798830537, guid: 043c2908da2000000d3c2908da200000,
+  PopUpPrefabDone: {fileID: 9188485033798830537, guid: ebff8b0d781946646b2a32edb4a424d2,
     type: 3}
   questionUI: {fileID: 3522829794802093672}
   textQuestion:

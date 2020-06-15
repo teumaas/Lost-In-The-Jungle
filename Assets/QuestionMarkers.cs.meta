@@ -4,10 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - PopUpPrefab: {fileID: 9188485033798830537, guid: 043c2908da2000000d3c2908da200000,
+  - PopUpPrefabDone: {fileID: 9188485033798830537, guid: ebff8b0d781946646b2a32edb4a424d2,
       type: 3}
-  - questionUI: {fileID: 9188485033798830537, guid: 043c2908da2000000d3c2908da200000,
-      type: 3}
+  - questionUI: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

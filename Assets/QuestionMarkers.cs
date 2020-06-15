@@ -30,7 +30,6 @@ public class QuestionMarkers : MonoBehaviour
     {
         levelData = GameController.getLevelData();
         Api = gameObject.AddComponent<APIHandler>();
-        PopUpPrefabDone = GameObject.Find("PopUpPrefabDone");
     }
 
     // Update is called once per frame
@@ -117,7 +116,6 @@ public class QuestionMarkers : MonoBehaviour
         foreach (KeyValuePair<string, string> item in responses) {
             gameData.answers.Add(new Assets.Scripts.Serializer.Put.Answer(item.Key, item.Value));
         }
-
         Api.GamePut("play", levelData.playID, (result) => {
             Level l = Level.CreateFromJSON(result);
             switch (l.level) {
@@ -131,8 +129,8 @@ public class QuestionMarkers : MonoBehaviour
                     GameController.loadRuins(l);
                     break;
                 default:
-                    GameController.loadMainMenu();
                     Instantiate(PopUpPrefabDone, new Vector3(0, 0, 0), Quaternion.identity);
+                    GameController.loadMainMenu();
                     break;
             }
         }, (error) => {
