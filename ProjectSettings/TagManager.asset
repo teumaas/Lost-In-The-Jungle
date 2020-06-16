@@ -3,7 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Fire
+  - EnterPIN
+  - InputPIN
+  - ErrorPIN
+  - PopUpTitle
+  - PopUpMessage
+  - PopUpClose
+  - PopUpCanvas
+  - PopUpPanel
+  - PopUpPrefab
+  - PopUp
+  - ButtonEnter
+  - EnterPinMenu
+  - SelectMenu
+  - DepartmentsDropDown
+  - PopUpDone
+  - PopUp404
   layers:
   - Default
   - TransparentFX
